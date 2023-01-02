@@ -10,6 +10,5 @@ public class PromptData : ScriptableObject
     public string[] _identity;
     public string[] _institution;
     public string[] _idea;
-    public string[] _investment;
     public string[] _tags;
 }

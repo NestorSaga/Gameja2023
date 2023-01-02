@@ -80,18 +80,9 @@ MonoBehaviour:
   - 'There''s an empty plot of land next to ours, and we''d like to buy it. However,
     at the start of the season we spent all of our savings on the crops and a bull.
     We''d need a bit more money to buy that land. '
-  _investment:
-  - We'd need 1,000 gold coins to do the final product and release it to the public.
-  - 'We need 700 golds! Let the people taste that fucking damn delicatessen! '
-  - 'Dragon, shark, we request 400 gold coins to be able to start the plays. '
-  - 'We''d need 1,200 coins to perfect its formula, and it''d be such an immense
-    advantadge that it would make us even greater than we are! '
-  - 'We need around 800 coins to get more equipment, materials and people. Thank
-    you! '
-  - 'We need like 500 coins to buy some equipment and we''ll be all set. '
-  - Thank you for listening to me. I hope you'll help. We need 1,000 gold coins to
-    do it all well. I promise this is in benefit of the people.
-  - 'We need just 1,500 gold. It was all expensive! Told you we''re the best, right? '
-  - 'We''ll need 750 coins to get good leather and equipment. '
-  - 'We just need 200 gold coins, it''s what they ask for it. If you could help us,
-    please. '
+  _tags:
+  - Religion
+  - Army
+  - People
+  - Business
+  - a
