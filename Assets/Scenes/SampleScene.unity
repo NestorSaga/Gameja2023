@@ -839,9 +839,11 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+
   m_GameObject: {fileID: 596661463}
   m_CullTransparentMesh: 1
 --- !u!1 &620834624
+
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2196,3 +2198,4 @@ RectTransform:
   m_AnchoredPosition: {x: -738.1582, y: -84.648926}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+
