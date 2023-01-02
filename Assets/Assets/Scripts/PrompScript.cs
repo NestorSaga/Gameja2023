@@ -42,4 +42,24 @@ public class PrompScript : MonoBehaviour
         string text = a + "%";
         ROIPercentage.text = text;
     }
+
+
+    public void Fund()
+    {
+
+        GameManager.Instance.recalculateCurrentGold(-int.Parse(FundCost.text));
+        GameManager.Instance.AddToCurrentList(this);
+    }
+
+    public void Copy(PrompScript obj)
+    {
+        obj.MainText = MainText;
+        obj.AffinityText = AffinityText;
+        obj.FundCost = FundCost;
+        obj.DenyText = DenyText;
+        obj.PercentageRange = PercentageRange;
+        obj.ROIPercentage = ROIPercentage;
+        obj.Affinity = Affinity;
+
+    }
 }
