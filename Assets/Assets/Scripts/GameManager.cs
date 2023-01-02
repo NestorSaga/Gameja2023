@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     public int currentGold;
     public TextMeshProUGUI currentGoldText;
 
-    public GameObject promptPrefab;
+    public GameObject promptPrefab, affiniyResultsPrefab;
     public RectTransform promptPosition, slideStartPos, slideEndPos, slideObject;
 
     public bool Funding, interludeFinished;
@@ -105,8 +105,9 @@ public class GameManager : MonoBehaviour
         
         if (peopleSeen < currentTotalPeople)
         {
-            GameObject newPrompt = Instantiate(promptPrefab, promptPosition.anchoredPosition, Quaternion.identity);
+            GameObject newPrompt = Instantiate(promptPrefab);
             newPrompt.transform.SetParent(promptPosition, false);
+            
 
             //newPrompt.transform.SetParent(promptPosition);
             peopleSeen++;
@@ -136,6 +137,14 @@ public class GameManager : MonoBehaviour
             }
 
             //Funded options appear
+
+            for (int i=0;i<currentFundedProjects.Count;i++)
+            {
+                GameObject newResult = Instantiate(affiniyResultsPrefab);
+                newResult.transform.SetParent(resultPositions[i], false);
+            }
+
+
             interludeFinished = true;
 
         }

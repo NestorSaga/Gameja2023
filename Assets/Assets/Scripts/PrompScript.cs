@@ -63,7 +63,7 @@ public class PrompScript : MonoBehaviour
     public void Deny()
     {
         GameManager.Instance.NextPrompt();
-        Debug.Log("cago");
+        
         gameObject.SetActive(false);
     }
 
