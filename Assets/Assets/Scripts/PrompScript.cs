@@ -10,6 +10,15 @@ public class PrompScript : MonoBehaviour
     public TextMeshProUGUI MainText, AffinityText, FundCost, DenyText, PercentageRange, ROIPercentage;
     public Image Affinity;
 
+    public int percentageRangeA, percentageRangeB, ROIPercentageValue;
+
+    public void Awake()
+    {
+        //To Do
+        //Add all values to all stats
+
+        setFundCost("500");
+    }
 
     public void setMainText(string text)
     {
@@ -46,9 +55,16 @@ public class PrompScript : MonoBehaviour
 
     public void Fund()
     {
-
-        GameManager.Instance.recalculateCurrentGold(-int.Parse(FundCost.text));
         GameManager.Instance.AddToCurrentList(this);
+        gameObject.SetActive(false);
+
+    }
+
+    public void Deny()
+    {
+        GameManager.Instance.NextPrompt();
+        Debug.Log("cago");
+        gameObject.SetActive(false);
     }
 
     public void Copy(PrompScript obj)
