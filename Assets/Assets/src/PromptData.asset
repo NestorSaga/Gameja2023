@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3772369e03fd9944e8a2d1efe101bd6e, type: 3}
+  m_Name: PromptData
+  m_EditorClassIdentifier: 
+  _greetings:
+  - Good day, esteemed dragon and shark!
+  - Aye, dragon! Aye, shark!
+  - May God be with you.
+  - Greetings!
+  - Pleased to meet you.
+  - Oi, mate! Thank you for letting us in!
+  - May you have good day, dear dragon and shark.
+  - You'll listen and say 'yes' because we just deserve it.
+  - Hello. I hope you're able to help us.
+  - Thank you for letting me come here to talk to you, o dragon and shark!
+  _identity:
+  - Let me tell you who we are.
+  - We'll introduce ourselves.
+  - You should already know who we are but I'll remind you.
+  - Let me introduce the business.
+  - I'll tell you who we are.
+  - Please, allow me to introduce my collective.
+  - You know who we are, right? Well, let me tell you, just in case you forgot.
+  - Please, let us introduce ourselves and our business.
+  - Please let me introduce myself and my family.
+  - Please, allow us to introduce ourselves and present our excellent idea.
+  _institution:
+  - I come in the name of the highly respected Magicians and Alchemists guild.
+  - My son and I are the best fishermen in the zone! I fish the biggest, the tastiest
+    fishes!
+  - We are the Pure Flame Church.
+  - 'We are the army of the Lotus Reign, the biggest and most powerful one in here '
+  - 'We are a simple leatherworker family. My granfather''s grandfather founded it,
+    and now we''re going through a bit of a rough patch. '
+  - 'We''re the oldest and best beer producers in all of the zone. Our beer is drank
+    by all of the kings in here '
+  - 'We are scientists that want to better this world. We don''t want to be rich,
+    just to advance our society. '
+  - 'We are the best adventurers on this world.  '
+  - 'We are a family of traditional shoemakers. '
+  - 'We are just humble farmers that want to grow more crops. '
+  _idea:
+  - 'We have stumbled upon a way to turn lead into gold, so we came seeking an investment
+    We want to refine our formula so we can comercialize it. Of course, such a discovery
+    will only be accessible to the most exclusive people! We now need an investment
+    to continue with our investigations.  '
+  - 'And now? Now we discovered an even BIGGER and TASTIER fish! But it is complicated
+    to fish. we need a special rode and the fucker broke the last one, a bigger boat,
+    men to help me. Will ya'' help us, mate? '
+  - 'We want to start doing theatre plays to entertain and teach our devotes. We
+    need to build a stage on one of our churches, and get the needed equipment to
+    be able to have good plays, and not just people reading a text. '
+  - 'We need to investigate more ways of winning wars. We discovered a new substance
+    to use in our wars. It''s so flammable that it burns even inside the water '
+  - 'However, we discovered a new way to treat leather, so it will be easier and
+    faster, and less damaging for the product. Now we can make a chest armor in less
+    than a week, when before at best we''d take two weeks to do it. '
+  - 'And now we can do more beer, and not only more... but better! We are faster
+    and better at it, even better than my granfather, the most famous beer-maker
+    EVER on this place. '
+  - 'We found a way to cure the Black Plague. However it''s still pretty primitive,
+    so it needs a lot more refinement. '
+  - 'We were, in fact, thinking of going adventuring and all this... However we don''t
+    have our weapons. Eh... that''s embarrassing, we didn''t lose them! What do you
+    mean your brother? Well... this. We need equipment and you better help us buy
+    it '
+  - 'We''d like to make better shoes, and to make them faster. I can''t help but
+    lament when all these cheap shoemakers charge for those crappy shoes, made with
+    crappy materials. So please, help us to be able to sell our good shoes to everyone. '
+  - 'There''s an empty plot of land next to ours, and we''d like to buy it. However,
+    at the start of the season we spent all of our savings on the crops and a bull.
+    We''d need a bit more money to buy that land. '
+  _investment:
+  - We'd need 1,000 gold coins to do the final product and release it to the public.
+  - 'We need 700 golds! Let the people taste that fucking damn delicatessen! '
+  - 'Dragon, shark, we request 400 gold coins to be able to start the plays. '
+  - 'We''d need 1,200 coins to perfect its formula, and it''d be such an immense
+    advantadge that it would make us even greater than we are! '
+  - 'We need around 800 coins to get more equipment, materials and people. Thank
+    you! '
+  - 'We need like 500 coins to buy some equipment and we''ll be all set. '
+  - Thank you for listening to me. I hope you'll help. We need 1,000 gold coins to
+    do it all well. I promise this is in benefit of the people.
+  - 'We need just 1,500 gold. It was all expensive! Told you we''re the best, right? '
+  - 'We''ll need 750 coins to get good leather and equipment. '
+  - 'We just need 200 gold coins, it''s what they ask for it. If you could help us,
+    please. '
