@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6291854620270397055}
   - component: {fileID: 6291854620270397054}
   m_Layer: 5
-  m_Name: Image
+  m_Name: MainTextBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 6291854620371030892}
   - component: {fileID: 6291854620371030895}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: ROI_Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 6291854620439012651}
   - component: {fileID: 6291854620439012650}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MainText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 6291854620680187551}
   - component: {fileID: 6291854620680187550}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: DenyButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -410,7 +410,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6291854620680187551}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6291854621600959851}
+        m_TargetAssemblyTypeName: PrompScript, Assembly-CSharp
+        m_MethodName: Deny
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6291854620806164787
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,7 +435,7 @@ GameObject:
   - component: {fileID: 6291854620806164790}
   - component: {fileID: 6291854620806164785}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: FundCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -477,7 +489,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: FUND
+  m_text: 800
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -555,6 +567,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6291854621078556976}
+  - component: {fileID: 6291854621600959851}
   m_Layer: 5
   m_Name: Prompt
   m_TagString: Untagged
@@ -571,7 +584,7 @@ RectTransform:
   m_GameObject: {fileID: 6291854621078556979}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
+  m_LocalScale: {x: 3.8, y: 3.8, z: 3.8}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6291854620270397049}
@@ -587,9 +600,31 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -98, y: -4}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 501, y: 313}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6291854621600959851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6291854621078556979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d02f795ab77b414595b8b3f6cbf7103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainText: {fileID: 6291854620439012650}
+  AffinityText: {fileID: 6291854621892095611}
+  FundCost: {fileID: 6291854620806164785}
+  DenyText: {fileID: 6291854622209564418}
+  PercentageRange: {fileID: 6291854621493736565}
+  ROIPercentage: {fileID: 6291854621730919995}
+  Affinity: {fileID: 6291854622021492937}
+  percentageRangeA: 0
+  percentageRangeB: 0
+  ROIPercentageValue: 0
 --- !u!1 &6291854621493736567
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,7 +637,7 @@ GameObject:
   - component: {fileID: 6291854621493736570}
   - component: {fileID: 6291854621493736565}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: PercentageRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -737,7 +772,7 @@ GameObject:
   - component: {fileID: 6291854621631892963}
   - component: {fileID: 6291854621631892962}
   m_Layer: 5
-  m_Name: Image
+  m_Name: PercentageIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -813,7 +848,7 @@ GameObject:
   - component: {fileID: 6291854621730919992}
   - component: {fileID: 6291854621730919995}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: ROI percentage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -949,7 +984,7 @@ GameObject:
   - component: {fileID: 6291854621838491707}
   - component: {fileID: 6291854621838491706}
   m_Layer: 5
-  m_Name: Button
+  m_Name: FundButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1057,7 +1092,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6291854621838491707}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6291854621600959851}
+        m_TargetAssemblyTypeName: PrompScript, Assembly-CSharp
+        m_MethodName: Fund
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6291854621892095605
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,7 +1117,7 @@ GameObject:
   - component: {fileID: 6291854621892095608}
   - component: {fileID: 6291854621892095611}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: AffinityText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1205,7 +1252,7 @@ GameObject:
   - component: {fileID: 6291854622021492942}
   - component: {fileID: 6291854622021492937}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: Affinity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1282,7 +1329,7 @@ GameObject:
   - component: {fileID: 6291854622209564419}
   - component: {fileID: 6291854622209564418}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: DenyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
