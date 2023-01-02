@@ -28,11 +28,16 @@ public class GameManager : MonoBehaviour
     public List<PrompScript> currentFundedProjects = new List<PrompScript>();
     public List<PrompScript> fundedProjectsRecord = new List<PrompScript>();
 
+    public List<Transform> resultPositions = new List<Transform>();
+
     public int currentGold;
     public TextMeshProUGUI currentGoldText;
 
     public GameObject promptPrefab;
     public RectTransform promptPosition, slideStartPos, slideEndPos, slideObject;
+
+    public bool Funding, interludeFinished;
+
 
     //----Mulitpliers----//
     public float peopleMultiplier, rangeMultiplier, ROIMultiplier, fundCostMultiplier;
@@ -44,7 +49,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Screen.SetResolution(1366,768,true);
+        Screen.SetResolution(1920,1080,true);
 
 
 
@@ -56,32 +61,37 @@ public class GameManager : MonoBehaviour
         peopleSeen = 0;
 
 
-        
-
+        //Instantiate new char
+        //Animation
+        Funding = true;
         NextPrompt();
     }
 
+
+    private void Update()
+    {
+        if (interludeFinished && Input.GetKey(KeyCode.E))
+        {
+            interludeFinished = false;
+            StartCoroutine(SlideOut());
+            Funding = true;
+
+
+            nextRound();
+        }
+    }
     public void nextRound()
     {
         peopleSeen = 0;
+
+        NextPrompt();
     }
 
     public void AddToCurrentList(PrompScript prompt)
     {
- 
         currentFundedProjects.Add(prompt);
         recalculateCurrentGold(-int.Parse(prompt.FundCost.text));
-
-
-
-
         NextPrompt();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void recalculateCurrentGold(int value)
@@ -103,7 +113,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            Funding = false;
             Interlude();
+
         }
         
     }
@@ -112,31 +124,35 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(SlideIn());
 
-        
-
-
         IEnumerator SlideIn(){
 
             float elapsedTime = 0;
 
             while (elapsedTime < 0.5f)
             {
-                slideObject.anchoredPosition = Vector3.Lerp(slideStartPos.anchoredPosition, slideEndPos.anchoredPosition, (elapsedTime / 0.5f));
+                slideObject.anchoredPosition = Vector3.Lerp(slideObject.anchoredPosition, slideEndPos.anchoredPosition, (elapsedTime / 0.5f));
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
+
+            //Funded options appear
+            interludeFinished = true;
+
         }
 
-        IEnumerator SlideOut(){
+        
+    }
 
-            float elapsedTime = 0;
+    IEnumerator SlideOut()
+    {
 
-            while (elapsedTime < 0.5f)
-            {
-                slideObject.anchoredPosition = Vector3.Lerp(slideEndPos.anchoredPosition, slideStartPos.anchoredPosition, (elapsedTime / 0.5f));
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
+        float elapsedTime = 0;
+
+        while (elapsedTime < 0.5f)
+        {
+            slideObject.anchoredPosition = Vector3.Lerp(slideObject.anchoredPosition, slideStartPos.anchoredPosition, (elapsedTime / 0.5f));
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
     }
 }
