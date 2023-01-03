@@ -63,7 +63,7 @@ public class PromptGenerator : MonoBehaviour
         {
             _tag = _promptData._tags[1];
         }
-        else if (indexIdea == 6)
+        else if (indexIdea == 6 || indexIdea == 10)
         {
             _tag = _promptData._tags[2];
         }
