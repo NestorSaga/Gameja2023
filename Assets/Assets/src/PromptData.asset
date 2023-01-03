@@ -23,6 +23,7 @@ MonoBehaviour:
   - You'll listen and say 'yes' because we just deserve it.
   - Hello. I hope you're able to help us.
   - Thank you for letting me come here to talk to you, o dragon and shark!
+  - Behold, thee honor!
   _identity:
   - Let me tell you who we are.
   - We'll introduce ourselves.
@@ -51,6 +52,10 @@ MonoBehaviour:
   - 'We are just humble farmers that want to grow more crops. '
   - We are the holy order of the cum grail.
   - We are a team of crewmates and we think there is an impostor.
+  - We are La Kripta.
+  - We are called the Church of Selium.
+  - We're the Straw Hat Pirates!
+  - We come from the future!
   _idea:
   - 'We have stumbled upon a way to turn lead into gold, so we came seeking an investment
     We want to refine our formula so we can comercialize it. Of course, such a discovery
@@ -83,6 +88,33 @@ MonoBehaviour:
     at the start of the season we spent all of our savings on the crops and a bull.
     We''d need a bit more money to buy that land. '
   - We want to make a feet rating business.
+  - We need more followers! We have to build a church and get priests. The Holy Cum
+    Grail needs people.
+  - We need swords and shields to wage war and arm our soldiers.
+  - We have a potion that will help solve a lot of health problems. We need to refine
+    it!
+  - We need an altar so people can pray to the Mind Goblin
+  - We have to find the plant that makes fruits that grants powers. They are unique
+    and can give great abilities..
+  - The pirates broke everything on our village! We need money to recover.
+  - We need to build a library for goblins. They throw us out from the human ones!
+    Hmpf!
+  - I want a better pick! I want to pick my enemies!
+  - We want to undertake a Holy Crusade to take Chult Back.
+  - We want funds to build more siege weapons.
+  - We need to avenge Camp Justice. The undead took it! We need it back!
+  - 'To find the greatest of the treasures of the sea: The Single Bit is reaaaaal!!!!!!!!'
+  - We want to build the Ork School of Fine Arts.
+  - We'll spread a controlled plague amongst the enemy lines. We have a cure, but
+    they don't.
+  - We're developing a full clad armor to surpass the Metal Gear.
+  - We need bigger work camps to allocate all the filthy beggars polluting our churches
+    and chapels!
+  - We need more inquisitors to take the witches and heretics to the stake. The Holy
+    Flame will burn them!
+  - "Some of our men started a fight in the tavern, now the owner demands that we
+    buy it as it is \u2014 all broken down."
+  - There are werewolves on the forests! We need to go and exterminate them.
   _tags:
   - Commerce
   - Commerce
@@ -94,4 +126,23 @@ MonoBehaviour:
   - Commerce
   - Commerce
   - People
-  - Cum
+  - People
+  - Religion
+  - Army
+  - People
+  - Religion
+  - Commerce
+  - People
+  - People
+  - People
+  - Religion
+  - Army
+  - Army
+  - Commerce
+  - People
+  - Army
+  - Army
+  - Religion
+  - Religion
+  - Army
+  - Army
