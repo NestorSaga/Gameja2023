@@ -10,7 +10,8 @@ public class PrompScript : MonoBehaviour
     public TextMeshProUGUI MainText, AffinityText, FundCost, DenyText, PercentageRange, ROIPercentage;
     public Image Affinity;
 
-    public int percentageRangeA, percentageRangeB, ROIPercentageValue;
+    public int percentageRangeA, percentageRangeB, fundCostValue;
+    public float ROIPercentageValue;
 
     public void Awake()
     {
@@ -32,6 +33,7 @@ public class PrompScript : MonoBehaviour
 
     public void setFundCost(string text)
     {
+        fundCostValue = int.Parse(text);
         FundCost.text = text;
     }
 
@@ -42,13 +44,16 @@ public class PrompScript : MonoBehaviour
 
     public void setPercentageRange(int a, int b)
     {
+        percentageRangeA = a;
+        percentageRangeB = b;
         string text = a + " - " + b;
         PercentageRange.text = text;
     }
 
-    public void setROIPercentage(int a)
+    public void setROIPercentage(float a)
     {
-        string text = a + "%";
+        ROIPercentageValue = a;
+        string text = a * 100 + "%";
         ROIPercentage.text = text;
     }
 

@@ -1377,6 +1377,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372ced11c2ff14a4186b6a3711a1dc31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  promptGenerator: {fileID: 2176465668992458820, guid: ae8ccf9ec34b4b2449bdad6143c87a14,
+    type: 3}
   currentFundedProjects: []
   fundedProjectsRecord: []
   resultPositions:
@@ -1408,6 +1410,7 @@ MonoBehaviour:
   fundCostMultiplier: 0
   currentTotalPeople: 10
   peopleSeen: 0
+  roundNumber: 0
 --- !u!1 &1251697993
 GameObject:
   m_ObjectHideFlags: 0
