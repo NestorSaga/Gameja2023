@@ -8,30 +8,20 @@ public class PromptGenerator : MonoBehaviour
 {
     [SerializeField] TMP_Text _promptUI;
     [SerializeField] PromptData _promptData;
-    private string _tag;
-    private int[] _lengths = new int[4];
+    public string _tag;
+    public int[] _lengths = new int[4];
 
-    void Start()
+    public void GeneratePrompt()
     {
+
         _lengths[0] = _promptData._greetings.Length;
         _lengths[1] = _promptData._identity.Length;
         _lengths[2] = _promptData._institution.Length;
         _lengths[3] = _promptData._idea.Length;
-    }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GeneratePrompt();
-        }
-    }
-
-    public void GeneratePrompt()
-    {
         int[] lastPrompts = new int[4];
         int[] prompts = {Random.Range(0, _lengths[0] - 1), Random.Range(0, _lengths[1] - 1), Random.Range(0, _lengths[2] - 1), Random.Range(0, _lengths[3] - 1)};
-        
+
         for (int i = 0; i < prompts.Length; i++)
         {
             if(lastPrompts[i] == prompts[i])
@@ -39,11 +29,15 @@ public class PromptGenerator : MonoBehaviour
                 prompts[i] = Random.Range(0, _lengths[i] - 1);
             }
         }
+        
 
         _promptUI.text = _promptData._greetings[prompts[0]] + " "
                         + _promptData._identity[prompts[1]] + " "
                         + _promptData._institution[prompts[2]] + " "
                         + _promptData._idea[prompts[3]] + " ";
+
+        
+
         AssignTag(prompts[3]);
 
         lastPrompts = prompts;
@@ -67,5 +61,7 @@ public class PromptGenerator : MonoBehaviour
         {
             _tag = _promptData._tags[2];
         }
+
+        Debug.Log(_tag);
     }
 }
