@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject promptPrefab, affiniyResultsPrefab;
     public RectTransform promptPosition, slideStartPos, slideEndPos, slideObject;
+    public Slider militarSlider, commerceSlider, religionSlider, infrastructureSlider;
 
     public bool Funding, interludeFinished;
 
@@ -99,7 +100,8 @@ public class GameManager : MonoBehaviour
             }
             for (int i = 0; i< resultPositions.Count;i++)
             {
-                Destroy(resultPositions[i].GetChild(0).gameObject);
+                if(resultPositions[i].transform.childCount > 0) Destroy(resultPositions[i].GetChild(0).gameObject);
+
             }
             currentFundedProjects.Clear();
             NextPrompt();
@@ -166,6 +168,21 @@ public class GameManager : MonoBehaviour
                 GameObject newResult = Instantiate(affiniyResultsPrefab);
                 newResult.transform.SetParent(resultPositions[i], false);
                 newResult.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentFundedProjects[i].AffinityText.text;
+                switch (newResult.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text)
+                {
+                    case "Religion":
+                        newResult.GetComponent<Image>().color = new Color(1,0,1,1);
+                        break;
+                    case "Militar":
+                        newResult.GetComponent<Image>().color = Color.red;
+                        break;
+                    case "People":
+                        newResult.GetComponent<Image>().color = Color.cyan;
+                        break;
+                    case "Business":
+                        newResult.GetComponent<Image>().color = Color.green;
+                        break;
+                }
                 yield return new WaitForSeconds(0.3f);
 
                 //calculate if winner winner chicken dinner
