@@ -171,7 +171,8 @@ public class GameManager : MonoBehaviour
                 GameObject newResult = Instantiate(affiniyResultsPrefab);
                 newResult.transform.SetParent(resultPositions[i], false);
                 //newResult.transform.GetChild(0).GetComponent<Image>().color = currentFundedProjects[i].AffinityText.text;
-                switch (newResult.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text)
+                newResult.GetComponent<Image>().color = currentFundedProjects[i].Affinity.color;
+                /*switch (newResult.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text)
                 {
                     case "Religion":
                         newResult.GetComponent<Image>().color = new Color(1,0,1,1);
@@ -185,19 +186,19 @@ public class GameManager : MonoBehaviour
                     case "Business":
                         newResult.GetComponent<Image>().color = Color.green;
                         break;
-                }
+                }*/
                 yield return new WaitForSeconds(0.3f);
 
                 //calculate if winner winner chicken dinner
                 if (CalculateWinnerInRange(currentFundedProjects[i].percentageRangeA, currentFundedProjects[i].percentageRangeB))
                 {
-                    newResult.transform.GetChild(1).gameObject.SetActive(true);
+                    newResult.transform.GetChild(0).gameObject.SetActive(true);
                     currentGold += (int)(currentFundedProjects[i].fundCostValue * currentFundedProjects[i].ROIPercentageValue);
                     currentGoldText.text = currentGold.ToString();
                     currentFundedProjects[i].hasWon = true;
                 }
                     
-                else newResult.transform.GetChild(2).gameObject.SetActive(true);
+                else newResult.transform.GetChild(1).gameObject.SetActive(true);
                 yield return new WaitForSeconds(0.15f);
             }
 

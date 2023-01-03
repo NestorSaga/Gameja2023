@@ -13,7 +13,7 @@ public class PrompScript : MonoBehaviour
     public Color[] affinity_colors;
     public Image Affinity, shadow;
 
-    public int percentageRangeA, percentageRangeB, fundCostValue;
+    public int percentageRangeA, percentageRangeB, fundCostValue, _colorId;
     public float ROIPercentageValue;
     public bool hasWon;
 
@@ -29,7 +29,11 @@ public class PrompScript : MonoBehaviour
     {
         MainText.text = text;
     }
-    
+
+    public void setColor(int id)
+    {
+        _colorId = id;
+    }
     public void setAffinityColor(int index)
     {
         Affinity.color = affinity_colors[index];

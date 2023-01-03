@@ -40,7 +40,25 @@ public class PromptGenerator : MonoBehaviour
 
 
         _tag = _promptData._tags[prompts[3]];
-        _colorId = prompts[3];
+
+        //_colorId = new string[] {"Army", "Commerce", "Religion", "People"}
+
+        switch (_tag)
+        {
+            case "Army":
+                _colorId = 0;
+                break;
+            case "Commerce":
+                _colorId = 1;
+                break;
+            case "Religion":
+                _colorId = 2;
+                break;
+            case "People":
+                _colorId = 3;
+                break;
+        }
+        //_colorId = prompts[3];
 
 
         lastPrompts = prompts;
