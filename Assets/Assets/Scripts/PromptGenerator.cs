@@ -36,32 +36,10 @@ public class PromptGenerator : MonoBehaviour
                         + _promptData._institution[prompts[2]] + " "
                         + _promptData._idea[prompts[3]] + " ";
 
-        
 
-        AssignTag(prompts[3]);
+
+        _tag = _promptData._tags[prompts[3]];
 
         lastPrompts = prompts;
-    }
-
-    public void AssignTag(int indexIdea)
-    {
-        if (indexIdea == 0 || indexIdea == 1 || indexIdea == 4 || indexIdea == 5 || indexIdea == 7 || indexIdea == 8)
-        {
-            _tag = _promptData._tags[3];
-        }
-        else if (indexIdea == 2)
-        {
-            _tag = _promptData._tags[0];
-        }
-        else if (indexIdea == 3 || indexIdea == 9)
-        {
-            _tag = _promptData._tags[1];
-        }
-        else if (indexIdea == 6)
-        {
-            _tag = _promptData._tags[2];
-        }
-
-        Debug.Log(_tag);
     }
 }

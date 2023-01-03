@@ -49,6 +49,8 @@ MonoBehaviour:
   - 'We are the best adventurers on this world.  '
   - 'We are a family of traditional shoemakers. '
   - 'We are just humble farmers that want to grow more crops. '
+  - We are the holy order of the cum grail.
+  - We are a team of crewmates and we think there is an impostor.
   _idea:
   - 'We have stumbled upon a way to turn lead into gold, so we came seeking an investment
     We want to refine our formula so we can comercialize it. Of course, such a discovery
@@ -57,7 +59,7 @@ MonoBehaviour:
   - 'And now? Now we discovered an even BIGGER and TASTIER fish! But it is complicated
     to fish. we need a special rode and the fucker broke the last one, a bigger boat,
     men to help me. Will ya'' help us, mate? '
-  - 'We want to start doing theatre plays to entertain and teach our devotes. We
+  - 'We want to start doing theatre plays to entertain and teach our devotees. We
     need to build a stage on one of our churches, and get the needed equipment to
     be able to have good plays, and not just people reading a text. '
   - 'We need to investigate more ways of winning wars. We discovered a new substance
@@ -80,8 +82,16 @@ MonoBehaviour:
   - 'There''s an empty plot of land next to ours, and we''d like to buy it. However,
     at the start of the season we spent all of our savings on the crops and a bull.
     We''d need a bit more money to buy that land. '
+  - We want to make a feet rating business.
   _tags:
+  - Commerce
+  - Commerce
   - Religion
-  - Militar
+  - Army
+  - Commerce
+  - Commerce
   - People
-  - Business
+  - Commerce
+  - Commerce
+  - People
+  - Cum
