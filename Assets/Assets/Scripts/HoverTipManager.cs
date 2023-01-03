@@ -31,10 +31,10 @@ public class HoverTipManager : MonoBehaviour
     private void ShowTip(string tip, Vector2 position)
     {
         tipText.text = tip;
-        tipWindow.sizeDelta = new Vector2(tipText.preferredWidth > 200 ? 200 : tipText.preferredWidth, tipText.preferredHeight);
+        //tipWindow.sizeDelta = new Vector2(tipText.preferredWidth > 200 ? 200 : tipText.preferredWidth, tipText.preferredHeight);
 
         tipWindow.gameObject.SetActive(true);
-        tipWindow.anchoredPosition = new Vector2(position.x, position.y);
+        //tipWindow.anchoredPosition = new Vector2(position.x, position.y);
     }
 
     private void HideTip()
