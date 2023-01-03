@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class PrompScript : MonoBehaviour
 {
 
-    public TextMeshProUGUI MainText, AffinityText, FundCost, DenyText, PercentageRange, ROIPercentage;
-    public Image Affinity;
+    public TextMeshProUGUI MainText, FundCost, DenyText, PercentageRange, ROIPercentage;
+    public Sprite[] affinity_shadows;
+    public Color[] affinity_colors;
+    public Image Affinity, shadow;
 
     public int percentageRangeA, percentageRangeB, fundCostValue;
     public float ROIPercentageValue;
@@ -27,9 +30,14 @@ public class PrompScript : MonoBehaviour
         MainText.text = text;
     }
     
-    public void setAffinityText(string text)
+    public void setAffinityColor(int index)
     {
-        AffinityText.text = text;
+        Affinity.color = affinity_colors[index];
+    }
+
+    public void setAffinityShadow(int id)
+    {
+        shadow.sprite = affinity_shadows[id];
     }
 
     public void setFundCost(string text)
@@ -73,15 +81,5 @@ public class PrompScript : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Copy(PrompScript obj)
-    {
-        obj.MainText = MainText;
-        obj.AffinityText = AffinityText;
-        obj.FundCost = FundCost;
-        obj.DenyText = DenyText;
-        obj.PercentageRange = PercentageRange;
-        obj.ROIPercentage = ROIPercentage;
-        obj.Affinity = Affinity;
-
-    }
+    
 }

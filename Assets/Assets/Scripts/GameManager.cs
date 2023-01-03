@@ -68,6 +68,9 @@ public class GameManager : MonoBehaviour
         //Animation
         Funding = true;
         roundNumber = 1;
+
+        slideObject.anchoredPosition = slideStartPos.anchoredPosition;  
+
         NextPrompt();
     }
 
@@ -167,7 +170,7 @@ public class GameManager : MonoBehaviour
             {
                 GameObject newResult = Instantiate(affiniyResultsPrefab);
                 newResult.transform.SetParent(resultPositions[i], false);
-                newResult.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentFundedProjects[i].AffinityText.text;
+                //newResult.transform.GetChild(0).GetComponent<Image>().color = currentFundedProjects[i].AffinityText.text;
                 switch (newResult.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text)
                 {
                     case "Religion":
@@ -224,8 +227,9 @@ public class GameManager : MonoBehaviour
 
         prompt.gameObject.GetComponent<PromptGenerator>().GeneratePrompt();
 
-
-        prompt.setAffinityText(prompt.gameObject.GetComponent<PromptGenerator>()._tag);
+        int _id = prompt.gameObject.GetComponent<PromptGenerator>()._colorId;
+        prompt.setAffinityColor(_id);
+        prompt.setAffinityShadow(_id);
         //prompt.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = prompt.gameObject.GetComponent<PromptGenerator>()._tag;  //Tag
 
 

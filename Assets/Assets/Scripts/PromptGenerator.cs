@@ -9,6 +9,7 @@ public class PromptGenerator : MonoBehaviour
     [SerializeField] TMP_Text _promptUI;
     [SerializeField] PromptData _promptData;
     public string _tag;
+    public int _colorId;
     public int[] _lengths = new int[4];
 
     public void GeneratePrompt()
@@ -39,6 +40,8 @@ public class PromptGenerator : MonoBehaviour
 
 
         _tag = _promptData._tags[prompts[3]];
+        _colorId = prompts[3];
+
 
         lastPrompts = prompts;
     }
