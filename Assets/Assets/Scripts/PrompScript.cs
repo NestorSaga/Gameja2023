@@ -12,6 +12,7 @@ public class PrompScript : MonoBehaviour
 
     public int percentageRangeA, percentageRangeB, fundCostValue;
     public float ROIPercentageValue;
+    public bool hasWon;
 
     public void Awake()
     {

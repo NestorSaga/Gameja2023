@@ -93,7 +93,18 @@ public class GameManager : MonoBehaviour
         {
             peopleSeen = 0;
             roundNumber++;
+            for (int i = 0; i < currentFundedProjects.Count; i++)
+            {
+                fundedProjectsRecord.Add(currentFundedProjects[i]);
+            }
+            for (int i = 0; i< resultPositions.Count;i++)
+            {
+                Destroy(resultPositions[i].GetChild(0).gameObject);
+            }
+            currentFundedProjects.Clear();
             NextPrompt();
+       
+
         }
         
     }
@@ -163,6 +174,7 @@ public class GameManager : MonoBehaviour
                     newResult.transform.GetChild(1).gameObject.SetActive(true);
                     currentGold += (int)(currentFundedProjects[i].fundCostValue * currentFundedProjects[i].ROIPercentageValue);
                     currentGoldText.text = currentGold.ToString();
+                    currentFundedProjects[i].hasWon = true;
                 }
                     
                 else newResult.transform.GetChild(2).gameObject.SetActive(true);
