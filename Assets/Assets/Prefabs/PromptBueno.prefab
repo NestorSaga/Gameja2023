@@ -95,7 +95,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5972874118379221788}
         m_TargetAssemblyTypeName: PrompScript, Assembly-CSharp
-        m_MethodName: Fund
+        m_MethodName: Deny
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -153,8 +153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -116, y: -277}
-  m_SizeDelta: {x: 533.42, y: 430.51}
+  m_AnchoredPosition: {x: -95, y: -277}
+  m_SizeDelta: {x: 298.9, y: 430.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1613893304985570574
 CanvasRenderer:
@@ -1726,8 +1726,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 183, y: -277}
-  m_SizeDelta: {x: 533.42, y: 430.51}
+  m_AnchoredPosition: {x: 164, y: -277}
+  m_SizeDelta: {x: 240.1, y: 430.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2588860381294007628
 CanvasRenderer:
