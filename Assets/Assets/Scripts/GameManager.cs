@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
 
     public Image head1, head2, head3;
 
+    public GameObject continueButton;
+
 
     //----Mulitpliers----//
     public float peopleMultiplier, rangeLowMultiplier, ROIMultiplier, fundCostMultiplier;
@@ -99,6 +101,7 @@ public class GameManager : MonoBehaviour
         SetPeopleInRound();
 
         StartMusic(randomMusicPaths[Random.Range(0, randomMusicPaths.Length)]);
+        //csm.SetAmount(currentGold);
         NextPrompt();
     }
 
@@ -107,22 +110,17 @@ public class GameManager : MonoBehaviour
     {
         if (interludeFinished && Input.GetKey(KeyCode.E))
         {
-            interludeFinished = false;
-            StartCoroutine(SlideOut());
-            Funding = true;
-
-
-            nextRound();
+            
         }
 
-        if (Input.GetKey(KeyCode.P))
+        /*if (Input.GetKey(KeyCode.P))
         {
             endController.GameEnd(true);//WIN
             StartMusic(winGamePath);
-        }
+        }*/
 
         //if (Input.GetKeyDown(KeyCode.A)) StartMusic(music1Path);
-        else if (Input.GetKey(KeyCode.U)) StopMusic();
+        //else if (Input.GetKey(KeyCode.U)) StopMusic();
     }
     public void nextRound()
     {
@@ -201,6 +199,9 @@ public class GameManager : MonoBehaviour
         recalculateCurrentGold(-int.Parse(prompt.FundCost.text));
     }
 
+    
+    [SerializeField] CoinStashManager csm;
+
     public void recalculateCurrentGold(int value)
     {
         currentGold += value;
@@ -216,6 +217,7 @@ public class GameManager : MonoBehaviour
             StartMusic(loseGamePath);
         } 
         currentGoldText.text = currentGold.ToString();
+        //csm.SetAmount(currentGold);
     }
 
     public void NextPrompt()
@@ -276,21 +278,21 @@ public class GameManager : MonoBehaviour
                 newResult.transform.SetParent(resultPositions[i], false);
                 //newResult.transform.GetChild(0).GetComponent<Image>().color = currentFundedProjects[i].AffinityText.text;
                 newResult.GetComponent<Image>().color = currentFundedProjects[i].Affinity.color;
-                /*switch (newResult.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text)
+                switch (currentFundedProjects[i]._colorId)
                 {
-                    case "Religion":
-                        newResult.GetComponent<Image>().color = new Color(1,0,1,1);
+                    case 0:
+                        newResult.transform.GetChild(2).gameObject.SetActive(true);
                         break;
-                    case "Militar":
-                        newResult.GetComponent<Image>().color = Color.red;
+                    case 1:
+                        newResult.transform.GetChild(3).gameObject.SetActive(true);
                         break;
-                    case "People":
-                        newResult.GetComponent<Image>().color = Color.cyan;
+                    case 2:
+                        newResult.transform.GetChild(4).gameObject.SetActive(true);
                         break;
-                    case "Business":
-                        newResult.GetComponent<Image>().color = Color.green;
+                    case 3:
+                        newResult.transform.GetChild(5).gameObject.SetActive(true);
                         break;
-                }*/
+                }
                 yield return new WaitForSeconds(0.3f);
 
                 //calculate if winner winner chicken dinner
@@ -332,6 +334,7 @@ public class GameManager : MonoBehaviour
 
 
             interludeFinished = true;
+            continueButton.SetActive(true);
 
         }
 
@@ -483,8 +486,8 @@ public class GameManager : MonoBehaviour
             highFundCost = 65;
         }
 
-        float lowFundCostCurrent = roundStartingGold * (lowFundCost / 100f);
-        float highFundCostCurrent = roundStartingGold * (highFundCost / 100f);
+        float lowFundCostCurrent = currentGold * (lowFundCost / 100f);
+        float highFundCostCurrent = currentGold * (highFundCost / 100f);
 
         //Bingo
         float bingoCheck = bingoChance;
@@ -547,6 +550,17 @@ public class GameManager : MonoBehaviour
     public void SetCurrentRound()
     {
         roundText.text = "Current Round: " + roundNumber + " / " + totalRounds;
+    }
+
+    public void NextRoundButton()
+    {
+        continueButton.SetActive(false);
+        interludeFinished = false;
+        StartCoroutine(SlideOut());
+        Funding = true;
+
+
+        nextRound();
     }
 
 
