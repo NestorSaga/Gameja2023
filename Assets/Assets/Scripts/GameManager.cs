@@ -144,13 +144,15 @@ public class GameManager : MonoBehaviour
             AddToCurrentList(prompt);
         }
 
+        ChangeFace(0);
+
         StartCoroutine(NPCAnim());
 
         IEnumerator NPCAnim()
         {
             nPCGenerator.PlayAnimation(false);
             yield return new WaitForSeconds(2.3f);
-            ChangeFace(0);
+            
             NextPrompt();
         }
     }
@@ -423,7 +425,7 @@ public class GameManager : MonoBehaviour
 
     public int CalculateFundCost()
     {
-        int lowFundCost = 10;
+        int lowFundCost = 20;
         int highFundCost = 45;
         if(commerceTimesUpgraded >= 3)
         {
@@ -460,10 +462,10 @@ public class GameManager : MonoBehaviour
 
     public void UpdateSliders()
     {
-        militarSlider.value = militarTimesUpgraded * 0.2f;
-        commerceSlider.value = commerceTimesUpgraded * 0.2f;
-        religionSlider.value = religionTimesUpgraded * 0.2f;
-        peopleSlider.value = peopleTimesUpdated * 0.2f;
+        militarSlider.value = militarTimesUpgraded * 1;
+        commerceSlider.value = commerceTimesUpgraded * 1;
+        religionSlider.value = religionTimesUpgraded * 1;
+        peopleSlider.value = peopleTimesUpdated * 1;
     }
 
     public void ChangeFace(int a)
