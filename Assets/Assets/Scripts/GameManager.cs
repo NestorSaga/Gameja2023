@@ -50,7 +50,8 @@ public class GameManager : MonoBehaviour
     //----Mulitpliers----//
     public float peopleMultiplier, rangeLowMultiplier, ROIMultiplier, fundCostMultiplier;
 
-    private int currentTotalPeople, peopleSeen, roundNumber;
+    public int currentTotalPeople, peopleSeen, roundNumber, totalRounds;
+    public TextMeshProUGUI peopleText, roundText;
 
     private int lowRange, highRange;
 
@@ -116,7 +117,7 @@ public class GameManager : MonoBehaviour
     }
     public void nextRound()
     {
-        if (roundNumber >= 10)
+        if (roundNumber >= totalRounds)
         {
             //Game end
             if (currentGold >= 1000000) endController.GameEnd(true);//WIN
@@ -503,6 +504,16 @@ public class GameManager : MonoBehaviour
             head3.gameObject.SetActive(true);
         }
     }
+
+    public void SetPeopleInRound()
+    {
+        peopleText.text = peopleSeen + " / " + currentTotalPeople;
+    }
+    public void SetCurrentRound()
+    {
+        roundText.text = roundNumber + " / " + totalRounds;
+    }
+
 
     public void StartMusic(string path)
     {
