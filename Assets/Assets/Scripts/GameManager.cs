@@ -139,6 +139,11 @@ public class GameManager : MonoBehaviour
     public void NPCDespawn(PrompScript prompt, bool denied)
     {
 
+        if (!denied)
+        {
+            AddToCurrentList(prompt);
+        }
+
         StartCoroutine(NPCAnim());
 
         IEnumerator NPCAnim()
@@ -146,11 +151,7 @@ public class GameManager : MonoBehaviour
             nPCGenerator.PlayAnimation(false);
             yield return new WaitForSeconds(2.3f);
             ChangeFace(0);
-            if (!denied)
-            {
-                AddToCurrentList(prompt);
-            }
-            else NextPrompt();
+            NextPrompt();
         }
     }
 
@@ -159,7 +160,6 @@ public class GameManager : MonoBehaviour
     {
         currentFundedProjects.Add(prompt);
         recalculateCurrentGold(-int.Parse(prompt.FundCost.text));
-        NextPrompt();
     }
 
     public void recalculateCurrentGold(int value)
