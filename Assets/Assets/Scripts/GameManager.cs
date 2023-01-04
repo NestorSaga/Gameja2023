@@ -35,17 +35,21 @@ public class GameManager : MonoBehaviour
 
     public GameObject promptPrefab, affiniyResultsPrefab;
     public RectTransform promptPosition, slideStartPos, slideEndPos, slideObject;
-    public Slider militarSlider, commerceSlider, religionSlider, infrastructureSlider;
+    public Slider militarSlider, commerceSlider, religionSlider, peopleSlider;
+    public int militarTimesUpgraded, commerceTimesUpgraded, religionTimesUpgraded, peopleTimesUpdated;
 
     public bool Funding, interludeFinished;
 
 
     //----Mulitpliers----//
-    public float peopleMultiplier, rangeMultiplier, ROIMultiplier, fundCostMultiplier;
+    public float peopleMultiplier, rangeLowMultiplier, ROIMultiplier, fundCostMultiplier;
 
-    public int currentTotalPeople, peopleSeen, roundNumber;
+    private int currentTotalPeople, peopleSeen, roundNumber;
 
     private int lowRange, highRange;
+
+    private int bingoMilitar, bingoReligion, bingoCommerce;
+    private bool hasBingoMilitarAppeared, hasBingoReligionAppeared, hasBingoCommerceAppeared;
 
 
 
@@ -57,10 +61,16 @@ public class GameManager : MonoBehaviour
 
 
         peopleMultiplier = 1;
-        rangeMultiplier = 1;
+        rangeLowMultiplier = 1;
         ROIMultiplier = 1;
         fundCostMultiplier = 1;
 
+        militarTimesUpgraded = 0;
+        commerceTimesUpgraded = 0;
+        religionTimesUpgraded = 0;
+        peopleTimesUpdated = 0;
+
+        currentTotalPeople = 8;
         peopleSeen = 0;
 
 
@@ -124,6 +134,8 @@ public class GameManager : MonoBehaviour
     public void recalculateCurrentGold(int value)
     {
         currentGold += value;
+        if (currentGold >= 1000000) { }//WIN
+        else if (currentGold <= 0) { }//LOSE
         currentGoldText.text = currentGold.ToString();
     }
 
@@ -196,6 +208,24 @@ public class GameManager : MonoBehaviour
                     currentGold += (int)(currentFundedProjects[i].fundCostValue * currentFundedProjects[i].ROIPercentageValue);
                     currentGoldText.text = currentGold.ToString();
                     currentFundedProjects[i].hasWon = true;
+
+                    //Assign value to slider
+                    switch(currentFundedProjects[i]._colorId){
+                        case 0:
+                            militarTimesUpgraded += 1;
+                            break;
+                        case 1:
+                            commerceTimesUpgraded += 1;
+                            break;
+                        case 2:
+                            religionTimesUpgraded += 1;
+                            break;
+                        case 3:
+                            peopleTimesUpdated += 1;
+                            break;
+                    }
+                    UpdateSliders();
+                    if (peopleTimesUpdated >= 3) currentTotalPeople = 10;
                 }
                     
                 else newResult.transform.GetChild(1).gameObject.SetActive(true);
@@ -229,39 +259,123 @@ public class GameManager : MonoBehaviour
         prompt.gameObject.GetComponent<PromptGenerator>().GeneratePrompt();
 
         int _id = prompt.gameObject.GetComponent<PromptGenerator>()._colorId;
+        prompt.setColor(_id);
         prompt.setAffinityColor(_id);
         prompt.setAffinityShadow(_id);
-        //prompt.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = prompt.gameObject.GetComponent<PromptGenerator>()._tag;  //Tag
+  
+        prompt.setFundCost(CalculateFundCost().ToString()); //Fund cost
 
+        CalculatePercentageRange(prompt);
+        switch (prompt._colorId)
+        {
+            case 0:
+                if (militarTimesUpgraded >= 1)
+                {
+                    prompt.setPercentageRange(lowRange, highRange, true);
+                }
+                else prompt.setPercentageRange(lowRange, highRange, false);
+                break;
+            case 1:
+                if (commerceTimesUpgraded >= 1)
+                {
+                    prompt.setPercentageRange(lowRange, highRange, true);
+                }
+                else prompt.setPercentageRange(lowRange, highRange, false);
+                break;
+            case 2:
+                if (religionTimesUpgraded >= 1)
+                {
+                    prompt.setPercentageRange(lowRange, highRange, true);
+                }
+                else prompt.setPercentageRange(lowRange, highRange, false);
+                break;
+            case 3:
+                if (peopleTimesUpdated >= 1)
+                {
+                    prompt.setPercentageRange(lowRange, highRange, true);
+                }
+                else  prompt.setPercentageRange(lowRange, highRange, false);
+                break;
+        }
+       
+        //IF NO FIRST PERK ??? INSTEAD OF VALUE UP  //Percentage Range
 
-        prompt.setFundCost(CalculateFundCost().ToString());
-        //prompt.transform.GetChild(2).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = CalculateFundCost().ToString();  //Fund cost
-
-        CalculatePercentageRange();
-        prompt.setPercentageRange(lowRange, highRange);
-        //prompt.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = lowRange + " - " + highRange;  //Percentage Range
-
-        prompt.setROIPercentage(CalculateROI());
-        //prompt.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text = CalculateROI().ToString() + "%"; //ROI Percentage
+        prompt.setROIPercentage(CalculateROI()); //ROI Percentage
     }
 
 
-    public void CalculatePercentageRange()
+    public void CalculatePercentageRange(PrompScript prompt)
     {
-        lowRange = Random.Range(25, 100 - 1);
 
-        highRange = Random.Range(lowRange, 100 - 1);
+        int startingLowRangeValue = 25;
+
+        if (religionTimesUpgraded >= 3) startingLowRangeValue = 35;
+
+        float amountToMultiply = startingLowRangeValue * 0.05f;
+        
+        switch (prompt._colorId)
+        {
+            case 0:
+                if (militarTimesUpgraded >= 1)
+                {
+                    amountToMultiply *= militarTimesUpgraded;
+                    lowRange = Random.Range((int)amountToMultiply, 100 - 1);
+                }else lowRange = Random.Range(startingLowRangeValue, 100 - 1);
+                break;
+            case 1:
+                if (commerceTimesUpgraded >= 1)
+                {
+                    amountToMultiply *= commerceTimesUpgraded;
+                    lowRange = Random.Range((int)amountToMultiply, 100 - 1);
+                }else lowRange = Random.Range(startingLowRangeValue, 100 - 1);
+                break;
+            case 2:
+                if (religionTimesUpgraded >= 1)
+                {
+                    amountToMultiply *= religionTimesUpgraded;
+                    lowRange = Random.Range((int)amountToMultiply, 100 - 1);
+                }else lowRange = Random.Range(startingLowRangeValue, 100 - 1);
+                break;
+            case 3:
+                if (peopleTimesUpdated >= 1)
+                {               
+                    amountToMultiply *= peopleTimesUpdated;
+                    lowRange = Random.Range((int)amountToMultiply, 100 - 1);
+                }
+                else lowRange = Random.Range(startingLowRangeValue, 100 - 1);
+                break;
+        }
+
+        highRange = Random.Range(lowRange, 55);
 
     }
 
     public float CalculateROI()
     {
-        return Random.Range(0f, 10f -1);
+
+        if(militarTimesUpgraded >=3) return Random.Range(1.75f, 3f);
+
+        return Random.Range(1.25f, 2f);
     }
 
     public int CalculateFundCost()
     {
-        return Random.Range(300, 900 - 1);
+        int lowFundCost = 10;
+        int highFundCost = 45;
+        if(commerceTimesUpgraded >= 3)
+        {
+            lowFundCost = 20;
+            highFundCost = 65;
+        }
+
+        float lowFundCostCurrent = currentGold * (lowFundCost / 100f);
+        float highFundCostCurrent = currentGold * (highFundCost / 100f);
+
+        Debug.Log("CurrentGold: " + currentGold + "---" + lowFundCostCurrent + " y alto " + highFundCostCurrent);
+
+        //Random incremental de 80% fund
+
+        return (int)Random.Range(lowFundCostCurrent, highFundCostCurrent);
     }
 
     public bool CalculateWinnerInRange(int a, int b)
@@ -273,5 +387,13 @@ public class GameManager : MonoBehaviour
 
         return false;
 
+    }
+
+    public void UpdateSliders()
+    {
+        militarSlider.value = militarTimesUpgraded * 0.2f;
+        commerceSlider.value = commerceTimesUpgraded * 0.2f;
+        religionSlider.value = religionTimesUpgraded * 0.2f;
+        peopleSlider.value = peopleTimesUpdated * 0.2f;
     }
 }

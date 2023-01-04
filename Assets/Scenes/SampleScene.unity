@@ -675,7 +675,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 23, y: 244}
+  m_AnchoredPosition: {x: 23, y: 724}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &317998148
@@ -1380,7 +1380,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.154
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1808,7 +1808,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.154
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2512,16 +2512,17 @@ MonoBehaviour:
   militarSlider: {fileID: 1367995612}
   commerceSlider: {fileID: 620834626}
   religionSlider: {fileID: 773128273}
-  infrastructureSlider: {fileID: 1879339035}
+  peopleSlider: {fileID: 1879339035}
+  militarTimesUpgraded: 0
+  commerceTimesUpgraded: 0
+  religionTimesUpgraded: 0
+  peopleTimesUpdated: 0
   Funding: 0
   interludeFinished: 0
   peopleMultiplier: 0
-  rangeMultiplier: 0
+  rangeLowMultiplier: 0
   ROIMultiplier: 0
   fundCostMultiplier: 0
-  currentTotalPeople: 10
-  peopleSeen: 0
-  roundNumber: 0
 --- !u!1 &1236057654
 GameObject:
   m_ObjectHideFlags: 0
@@ -3103,7 +3104,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.14
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4680,7 +4681,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.154
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

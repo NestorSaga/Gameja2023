@@ -55,18 +55,21 @@ public class PrompScript : MonoBehaviour
         DenyText.text = text;
     }
 
-    public void setPercentageRange(int a, int b)
+    public void setPercentageRange(int a, int b, bool visible)
     {
         percentageRangeA = a;
         percentageRangeB = b;
-        string text = a + " - " + b;
+        string text;
+        if (visible) text = a + " - " + b;
+        else text = a + " - ??";
+
         PercentageRange.text = text;
     }
 
     public void setROIPercentage(float a)
     {
         ROIPercentageValue = a;
-        string text = a * 100 + "%";
+        string text = (int)((a-1f) * 100f) + "%";
         ROIPercentage.text = text;
     }
 
