@@ -25,13 +25,12 @@ public class PromptGenerator : MonoBehaviour
 
         for (int i = 0; i < prompts.Length; i++)
         {
-            if(lastPrompts[i] == prompts[i])
+            do
             {
                 prompts[i] = Random.Range(0, _lengths[i] - 1);
-            }
+            } while (lastPrompts[i] == prompts[i]);
         }
         
-
         _promptUI.text = _promptData._greetings[prompts[0]] + " "
                         + _promptData._identity[prompts[1]] + " "
                         + _promptData._institution[prompts[2]] + " "
