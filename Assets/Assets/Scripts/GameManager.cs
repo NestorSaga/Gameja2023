@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     }
 
     public PromptGenerator promptGenerator;
+    public NPCGenerator nPCGenerator;
+    public EndController endController;
 
     public List<PrompScript> currentFundedProjects = new List<PrompScript>();
     public List<PrompScript> fundedProjectsRecord = new List<PrompScript>();
@@ -40,6 +42,8 @@ public class GameManager : MonoBehaviour
 
     public bool Funding, interludeFinished;
 
+    public Image head1, head2, head3;
+
 
     //----Mulitpliers----//
     public float peopleMultiplier, rangeLowMultiplier, ROIMultiplier, fundCostMultiplier;
@@ -50,6 +54,7 @@ public class GameManager : MonoBehaviour
 
     private int bingoMilitar, bingoReligion, bingoCommerce;
     private bool hasBingoMilitarAppeared, hasBingoReligionAppeared, hasBingoCommerceAppeared;
+    public float bingoChance;
 
 
 
@@ -96,16 +101,23 @@ public class GameManager : MonoBehaviour
 
             nextRound();
         }
+
+        if (Input.GetKey(KeyCode.P)) endController.GameEnd(false);
     }
     public void nextRound()
     {
         if (roundNumber >= 10)
         {
             //Game end
+            if (currentGold >= 1000000) endController.GameEnd(true);//WIN
+            else if (currentGold <= 0) endController.GameEnd(false);//LOSE
         }
         else
         {
             peopleSeen = 0;
+            hasBingoCommerceAppeared = false;
+            hasBingoMilitarAppeared = false;
+            hasBingoReligionAppeared = false;
             roundNumber++;
             for (int i = 0; i < currentFundedProjects.Count; i++)
             {
@@ -124,6 +136,25 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void NPCDespawn(PrompScript prompt, bool denied)
+    {
+
+        StartCoroutine(NPCAnim());
+
+        IEnumerator NPCAnim()
+        {
+            nPCGenerator.PlayAnimation(false);
+            yield return new WaitForSeconds(2.3f);
+            ChangeFace(0);
+            if (!denied)
+            {
+                AddToCurrentList(prompt);
+            }
+            else NextPrompt();
+        }
+    }
+
+
     public void AddToCurrentList(PrompScript prompt)
     {
         currentFundedProjects.Add(prompt);
@@ -134,8 +165,8 @@ public class GameManager : MonoBehaviour
     public void recalculateCurrentGold(int value)
     {
         currentGold += value;
-        if (currentGold >= 1000000) { }//WIN
-        else if (currentGold <= 0) { }//LOSE
+        if (currentGold >= 1000000) endController.GameEnd(true);//WIN
+        else if (currentGold <= 0) endController.GameEnd(false);//LOSE
         currentGoldText.text = currentGold.ToString();
     }
 
@@ -144,20 +175,29 @@ public class GameManager : MonoBehaviour
         
         if (peopleSeen < currentTotalPeople)
         {
-            GameObject newPrompt = Instantiate(promptPrefab);
-            newPrompt.transform.SetParent(promptPosition, false);
-            
-            GenerateNewPrompt(newPrompt.GetComponent<PrompScript>());
-            
+            nPCGenerator.GenerateNPC();
 
-            //newPrompt.transform.SetParent(promptPosition);
-            peopleSeen++;
+            StartCoroutine(NPCAnim());
+
+            IEnumerator NPCAnim()
+            {
+                nPCGenerator.PlayAnimation(true);
+                yield return new WaitForSeconds(2f);
+
+                GameObject newPrompt = Instantiate(promptPrefab);
+                newPrompt.transform.SetParent(promptPosition, false);
+
+                GenerateNewPrompt(newPrompt.GetComponent<PrompScript>());
+
+
+                //newPrompt.transform.SetParent(promptPosition);
+                peopleSeen++;
+            } 
         }
         else
         {
             Funding = false;
             Interlude();
-
         }
         
     }
@@ -226,6 +266,12 @@ public class GameManager : MonoBehaviour
                     }
                     UpdateSliders();
                     if (peopleTimesUpdated >= 3) currentTotalPeople = 10;
+                    if (peopleTimesUpdated >= 3)
+                    {
+                        militarTimesUpgraded += 1;
+                        commerceTimesUpgraded += 1;
+                        religionTimesUpgraded += 1;
+                    }
                 }
                     
                 else newResult.transform.GetChild(1).gameObject.SetActive(true);
@@ -311,6 +357,14 @@ public class GameManager : MonoBehaviour
 
         if (religionTimesUpgraded >= 3) startingLowRangeValue = 35;
 
+        //Bingo
+        float bingoCheck = bingoChance;
+        float checking = Random.Range(0f, 10f);
+        if (checking <= bingoCheck)
+        {
+            if (!hasBingoReligionAppeared && religionTimesUpgraded >= 5) startingLowRangeValue = 90;
+        }
+
         float amountToMultiply = startingLowRangeValue * 0.05f;
         
         switch (prompt._colorId)
@@ -352,8 +406,17 @@ public class GameManager : MonoBehaviour
 
     public float CalculateROI()
     {
+        //Bingo
+        float bingoCheck = bingoChance;
+        float checking = Random.Range(0f,10f);
+        if (checking <= bingoCheck)
+        {
+            if (!hasBingoMilitarAppeared && militarTimesUpgraded >= 5) return Random.Range(5f, 8f);
+        }
 
-        if(militarTimesUpgraded >=3) return Random.Range(1.75f, 3f);
+        
+
+        if (militarTimesUpgraded >=3) return Random.Range(1.75f, 3f);
 
         return Random.Range(1.25f, 2f);
     }
@@ -371,11 +434,17 @@ public class GameManager : MonoBehaviour
         float lowFundCostCurrent = currentGold * (lowFundCost / 100f);
         float highFundCostCurrent = currentGold * (highFundCost / 100f);
 
-        Debug.Log("CurrentGold: " + currentGold + "---" + lowFundCostCurrent + " y alto " + highFundCostCurrent);
-
-        //Random incremental de 80% fund
-
+        //Bingo
+        float bingoCheck = bingoChance;
+        float checking = Random.Range(0f, 10f);
+        if (checking <= bingoCheck)
+        {
+            if (!hasBingoCommerceAppeared && commerceTimesUpgraded >= 5) return (int)(currentGold * (90f / 100f));
+        }
+         
         return (int)Random.Range(lowFundCostCurrent, highFundCostCurrent);
+
+
     }
 
     public bool CalculateWinnerInRange(int a, int b)
@@ -395,5 +464,27 @@ public class GameManager : MonoBehaviour
         commerceSlider.value = commerceTimesUpgraded * 0.2f;
         religionSlider.value = religionTimesUpgraded * 0.2f;
         peopleSlider.value = peopleTimesUpdated * 0.2f;
+    }
+
+    public void ChangeFace(int a)
+    {
+        if (a == 0)
+        {
+            head1.gameObject.SetActive(true);
+            head2.gameObject.SetActive(false);
+            head3.gameObject.SetActive(false);
+        }
+        else if (a == 1)
+        {
+            head1.gameObject.SetActive(false);
+            head2.gameObject.SetActive(true);
+            head3.gameObject.SetActive(false);
+        }
+        else
+        {
+            head1.gameObject.SetActive(false);
+            head2.gameObject.SetActive(false);
+            head3.gameObject.SetActive(true);
+        }
     }
 }

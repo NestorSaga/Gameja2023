@@ -76,17 +76,21 @@ public class PrompScript : MonoBehaviour
 
     public void Fund()
     {
-        GameManager.Instance.AddToCurrentList(this);
+        //GameManager.Instance.AddToCurrentList(this);
+        GameManager.Instance.NPCDespawn(this,false);
         gameObject.SetActive(false);
 
     }
 
     public void Deny()
     {
-        GameManager.Instance.NextPrompt();
+        GameManager.Instance.NPCDespawn(this, true);
+        //GameManager.Instance.NextPrompt();
         
         gameObject.SetActive(false);
     }
+
+
 
     
 }
