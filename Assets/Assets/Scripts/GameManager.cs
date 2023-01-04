@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
 
     //----FMOD----//
     public string[] randomMusicPaths;
-    public string winGamePath, loseGamePath, interludePath;
+    public string winGamePath, loseGamePath, interludePath, trapHalationPath;
     public FMOD.Studio.EventInstance eventInstance1, eventInstance2;
     public bool is1Playing;
 
@@ -140,8 +140,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-
-            StartMusic(randomMusicPaths[Random.Range(0,randomMusicPaths.Length)]);
+            float chance = 0.01f;
+            if (Random.Range(0f, 100f) <= chance) StartMusic(trapHalationPath);
+            else StartMusic(randomMusicPaths[Random.Range(0,randomMusicPaths.Length)]);
 
 
             roundStartingGold = currentGold;
@@ -179,7 +180,7 @@ public class GameManager : MonoBehaviour
             AddToCurrentList(prompt);
         }
 
-        ChangeFace(0);
+        
 
         StartCoroutine(NPCAnim());
 
@@ -187,7 +188,8 @@ public class GameManager : MonoBehaviour
         {
             nPCGenerator.PlayAnimation(false);
             yield return new WaitForSeconds(2.3f);
-            
+
+            ChangeFace(0);
             NextPrompt();
         }
     }
