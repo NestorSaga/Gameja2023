@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1223,8 +1223,9 @@ GameObject:
   m_Component:
   - component: {fileID: 330585546}
   - component: {fileID: 330585545}
-  - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585548}
+  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1232,14 +1233,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &330585544
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
 --- !u!20 &330585545
 Camera:
   m_ObjectHideFlags: 0
@@ -1331,6 +1324,27 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &330585548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
+--- !u!81 &330585549
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 0
 --- !u!1 &345497771
 GameObject:
   m_ObjectHideFlags: 0
@@ -2301,7 +2315,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8e19784a74913a24ea3be70e8bf7555a, type: 3}
   torsos:
   - {fileID: 21300000, guid: 39cb509e05a5d194abdab8ce71f5ddde, type: 3}
-  - {fileID: 21300000, guid: 5bd824c1a86821a45a692b98187efd79, type: 3}
+  - {fileID: 21300000, guid: 790b15d8653b69d46bd4d4e473980fd3, type: 3}
   - {fileID: 21300000, guid: e57bb779a93fbd54dac3cc298f5698d0, type: 3}
   - {fileID: 21300000, guid: 390192790b02bfd4388ae1c744893a52, type: 3}
   legs:
@@ -2309,6 +2323,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f8cc1765bc686504ba9cd35bba9607a4, type: 3}
   - {fileID: 21300000, guid: e12d046685241bf448dc256810ed162b, type: 3}
   - {fileID: 21300000, guid: 39babca7cf7267a478c1811dd6ab42c6, type: 3}
+  empyMask: {fileID: 21300000, guid: a132f12e3cfd9294397792b7a7cccdcc, type: 3}
   lastIndex: 
   animEnter: {fileID: 7400000, guid: bddb54128530e1c4f8dccf560af4c037, type: 2}
   animExit: {fileID: 7400000, guid: 739eb036453a02849810632a8a68030a, type: 2}
@@ -3028,6 +3043,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946085407}
   m_CullTransparentMesh: 1
+--- !u!1 &1013022878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1013022880}
+  m_Layer: 0
+  m_Name: MusicManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1013022880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013022878}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.059164394, y: 0.13424638, z: -1.6924772}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1016816930
 GameObject:
   m_ObjectHideFlags: 0
@@ -3390,6 +3436,7 @@ MonoBehaviour:
   - {fileID: 423245339}
   - {fileID: 1383066651}
   currentGold: 20000
+  roundStartingGold: 0
   currentGoldText: {fileID: 1788999193}
   promptPrefab: {fileID: 5972874116787302212, guid: 1bd6c8560c8e1054b8c0a5889e3795ff,
     type: 3}
@@ -3417,6 +3464,8 @@ MonoBehaviour:
   ROIMultiplier: 0
   fundCostMultiplier: 0
   bingoChance: 2.5
+  music1Path: event:/familiguy
+  music2Path: 
 --- !u!1 &1228340663
 GameObject:
   m_ObjectHideFlags: 0
@@ -3510,7 +3559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1236057655
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4837,7 +4886,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550639499}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

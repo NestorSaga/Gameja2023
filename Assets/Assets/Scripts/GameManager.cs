@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using FMOD;
+using FMODUnity;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     public List<Transform> resultPositions = new List<Transform>();
 
-    public int currentGold;
+    public int currentGold, roundStartingGold;
     public TextMeshProUGUI currentGoldText;
 
     public GameObject promptPrefab, affiniyResultsPrefab;
@@ -56,6 +58,10 @@ public class GameManager : MonoBehaviour
     private bool hasBingoMilitarAppeared, hasBingoReligionAppeared, hasBingoCommerceAppeared;
     public float bingoChance;
 
+    //----FMOD----//
+    public string music1Path, music2Path;
+    public FMOD.Studio.EventInstance eventInstance;
+
 
 
     // Start is called before the first frame update
@@ -64,6 +70,7 @@ public class GameManager : MonoBehaviour
         Screen.SetResolution(1920,1080,true);
 
 
+        roundStartingGold = currentGold;
 
         peopleMultiplier = 1;
         rangeLowMultiplier = 1;
@@ -103,6 +110,9 @@ public class GameManager : MonoBehaviour
         }
 
         if (Input.GetKey(KeyCode.P)) endController.GameEnd(false);
+
+        if (Input.GetKeyDown(KeyCode.A)) StartMusic(music1Path);
+        else if (Input.GetKey(KeyCode.U)) StopMusic();
     }
     public void nextRound()
     {
@@ -114,6 +124,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            roundStartingGold = currentGold;
+
             peopleSeen = 0;
             hasBingoCommerceAppeared = false;
             hasBingoMilitarAppeared = false;
@@ -138,6 +150,8 @@ public class GameManager : MonoBehaviour
 
     public void NPCDespawn(PrompScript prompt, bool denied)
     {
+
+        StopMusic();
 
         if (!denied)
         {
@@ -433,15 +447,15 @@ public class GameManager : MonoBehaviour
             highFundCost = 65;
         }
 
-        float lowFundCostCurrent = currentGold * (lowFundCost / 100f);
-        float highFundCostCurrent = currentGold * (highFundCost / 100f);
+        float lowFundCostCurrent = roundStartingGold * (lowFundCost / 100f);
+        float highFundCostCurrent = roundStartingGold * (highFundCost / 100f);
 
         //Bingo
         float bingoCheck = bingoChance;
         float checking = Random.Range(0f, 10f);
         if (checking <= bingoCheck)
         {
-            if (!hasBingoCommerceAppeared && commerceTimesUpgraded >= 5) return (int)(currentGold * (90f / 100f));
+            if (!hasBingoCommerceAppeared && commerceTimesUpgraded >= 5) return (int)(roundStartingGold * (90f / 100f));
         }
          
         return (int)Random.Range(lowFundCostCurrent, highFundCostCurrent);
@@ -488,5 +502,25 @@ public class GameManager : MonoBehaviour
             head2.gameObject.SetActive(false);
             head3.gameObject.SetActive(true);
         }
+    }
+
+    public void StartMusic(string path)
+    {
+        UnityEngine.Debug.Log("Empieza");
+
+        eventInstance = FMODUnity.RuntimeManager.CreateInstance(path);
+
+        eventInstance.start();
+        eventInstance.setVolume(0.5f);
+
+
+
+    }
+
+    public void StopMusic()
+    {
+        UnityEngine.Debug.Log("PARAAAA");
+        eventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        eventInstance.release();
     }
 }

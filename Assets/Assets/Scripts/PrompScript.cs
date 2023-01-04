@@ -76,9 +76,13 @@ public class PrompScript : MonoBehaviour
 
     public void Fund()
     {
-        //GameManager.Instance.AddToCurrentList(this);
-        GameManager.Instance.NPCDespawn(this,false);
-        gameObject.SetActive(false);
+        if(!(GameManager.Instance.currentGold - this.fundCostValue <=0))
+        {
+            //GameManager.Instance.AddToCurrentList(this);
+            GameManager.Instance.NPCDespawn(this, false);
+            gameObject.SetActive(false);
+        }
+
 
     }
 
