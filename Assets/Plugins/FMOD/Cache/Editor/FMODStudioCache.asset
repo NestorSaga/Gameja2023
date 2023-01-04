@@ -69,10 +69,10 @@ MonoBehaviour:
   Path: ../../../FMOD Studio/Gameja/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638084601394281444
+  lastModified: 638084715200123046
   FileSizes:
   - Name: Desktop
-    Value: 1140
+    Value: 1242
   Exists: 1
 --- !u!114 &-2190612601207321807
 MonoBehaviour:
@@ -101,6 +101,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 24000
+--- !u!114 &-1840216869058286081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/521954__tuerer__coin-drop
+  m_EditorClassIdentifier: 
+  Path: event:/521954__tuerer__coin-drop
+  Guid:
+    Data1: -110685104
+    Data2: 1288799225
+    Data3: 804914096
+    Data4: 1940451398
+  Banks:
+  - {fileID: -1612035014458429821}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2238
 --- !u!114 &-1612035014458429821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,10 +143,10 @@ MonoBehaviour:
   Path: ../../../FMOD Studio/Gameja/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638084601394266399
+  lastModified: 638084715200102857
   FileSizes:
   - Name: Desktop
-    Value: 4700000
+    Value: 5601440
   Exists: 1
 --- !u!114 &-251157895172508564
 MonoBehaviour:
@@ -174,12 +201,14 @@ MonoBehaviour:
   - {fileID: 3692247122948939197}
   - {fileID: 7937302996338060238}
   - {fileID: -8634483522752630404}
+  - {fileID: 3162244704062854164}
+  - {fileID: -1840216869058286081}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1612035014458429821}
   StringsBanks:
   - {fileID: -3171743591244013457}
-  cacheTime: 638084601394281444
+  cacheTime: 638084715200123046
   cacheVersion: 131593
 --- !u!114 &1234110387627648450
 MonoBehaviour:
@@ -231,6 +260,33 @@ MonoBehaviour:
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 64006
+--- !u!114 &3162244704062854164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/trap2
+  m_EditorClassIdentifier: 
+  Path: event:/trap2
+  Guid:
+    Data1: -169764476
+    Data2: 1150862182
+    Data3: -1309438066
+    Data4: 495075706
+  Banks:
+  - {fileID: -1612035014458429821}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20

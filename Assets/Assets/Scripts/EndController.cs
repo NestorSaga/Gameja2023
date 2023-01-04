@@ -33,11 +33,20 @@ public class EndController : MonoBehaviour
 
     public void replay()
     {
+        GameManager.Instance.eventInstance1.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        GameManager.Instance.eventInstance2.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        GameManager.Instance.eventInstance1.release();
+        GameManager.Instance.eventInstance2.release();
         SceneManager.LoadScene(1);
     }
 
     public void menu()
     {
+
+        GameManager.Instance.eventInstance1.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        GameManager.Instance.eventInstance2.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        GameManager.Instance.eventInstance1.release();
+        GameManager.Instance.eventInstance2.release();
         SceneManager.LoadScene(0);
     }
 }

@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     public bool Funding, interludeFinished;
 
     public Image head1, head2, head3;
+    public Image dragonHead1, dragonHead2, dragonHead3;
 
     public GameObject continueButton;
 
@@ -113,6 +114,8 @@ public class GameManager : MonoBehaviour
             
         }
 
+        //UnityEngine.Debug.Log(Random.Range(200,50));
+
         /*if (Input.GetKey(KeyCode.P))
         {
             endController.GameEnd(true);//WIN
@@ -132,7 +135,7 @@ public class GameManager : MonoBehaviour
                 endController.GameEnd(true);//WIN
                 StartMusic(winGamePath);
             }
-            else if (currentGold <= 10000) 
+            else if (currentGold <= 1000000) 
             {
                 endController.GameEnd(false);//LOSE
                 StartMusic(loseGamePath);
@@ -140,6 +143,11 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+
+            float chance = 0.01f;
+            if (Random.Range(0f, 100f) <= chance) StartMusic(trapHalationPath);
+            else StartMusic(randomMusicPaths[Random.Range(0, randomMusicPaths.Length - 1)]);
+
             if (currentGold >= 1000000)
             {
                 endController.GameEnd(true);//WIN
@@ -152,10 +160,7 @@ public class GameManager : MonoBehaviour
                 StartMusic(loseGamePath);
             }
 
-            float chance = 0.01f;
-            if (Random.Range(0f, 100f) <= chance) StartMusic(trapHalationPath);
-            else StartMusic(randomMusicPaths[Random.Range(0,randomMusicPaths.Length)]);
-
+           
 
             roundStartingGold = currentGold;
 
@@ -412,9 +417,9 @@ public class GameManager : MonoBehaviour
     public void CalculatePercentageRange(PrompScript prompt)
     {
 
-        int startingLowRangeValue = 25;
+        int startingLowRangeValue = 35;
 
-        if (religionTimesUpgraded >= 3) startingLowRangeValue = 35;
+        if (religionTimesUpgraded >= 3) startingLowRangeValue = 45;
 
         //Bingo
         float bingoCheck = bingoChance;
@@ -424,42 +429,47 @@ public class GameManager : MonoBehaviour
             if (!hasBingoReligionAppeared && religionTimesUpgraded >= 5) startingLowRangeValue = 90;
         }
 
-        float amountToMultiply = startingLowRangeValue * 0.05f;
+        
         
         switch (prompt._colorId)
         {
             case 0:
                 if (militarTimesUpgraded >= 1)
                 {
-                    amountToMultiply *= militarTimesUpgraded;
-                    lowRange = Random.Range((int)amountToMultiply, 50 - 1);
-                }else lowRange = Random.Range(startingLowRangeValue, 50 - 1);
+                    float amountToMultiply = militarTimesUpgraded * 1.05f;
+                    amountToMultiply *= startingLowRangeValue;
+                    lowRange = Random.Range((int)amountToMultiply, 60);
+
+                }else lowRange = Random.Range(startingLowRangeValue, 60);
                 break;
             case 1:
                 if (commerceTimesUpgraded >= 1)
                 {
-                    amountToMultiply *= commerceTimesUpgraded;
-                    lowRange = Random.Range((int)amountToMultiply, 50 - 1);
-                }else lowRange = Random.Range(startingLowRangeValue, 50 - 1);
+                    float amountToMultiply = commerceTimesUpgraded * 1.05f;
+                    amountToMultiply *= startingLowRangeValue;
+                    lowRange = Random.Range((int)amountToMultiply, 60);
+                }else lowRange = Random.Range(startingLowRangeValue, 60);
                 break;
             case 2:
                 if (religionTimesUpgraded >= 1)
                 {
-                    amountToMultiply *= religionTimesUpgraded;
-                    lowRange = Random.Range((int)amountToMultiply, 50 - 1);
-                }else lowRange = Random.Range(startingLowRangeValue, 50 - 1);
+                    float amountToMultiply = religionTimesUpgraded * 1.05f;
+                    amountToMultiply *= startingLowRangeValue;
+                    lowRange = Random.Range((int)amountToMultiply, 60);
+                }else lowRange = Random.Range(startingLowRangeValue, 60);
                 break;
             case 3:
                 if (peopleTimesUpdated >= 1)
-                {               
-                    amountToMultiply *= peopleTimesUpdated;
-                    lowRange = Random.Range((int)amountToMultiply, 50 - 1);
+                {
+                    float amountToMultiply = peopleTimesUpdated * 1.05f;
+                    amountToMultiply *= startingLowRangeValue;
+                    lowRange = Random.Range((int)amountToMultiply, 60);
                 }
-                else lowRange = Random.Range(startingLowRangeValue, 50 - 1);
+                else lowRange = Random.Range(startingLowRangeValue, 60);
                 break;
         }
 
-        highRange = Random.Range(lowRange, 75);
+        highRange = Random.Range(lowRange, 80);
 
     }
 
@@ -475,9 +485,9 @@ public class GameManager : MonoBehaviour
 
         
 
-        if (militarTimesUpgraded >=3) return Random.Range(1.75f, 3f);
+        if (militarTimesUpgraded >=3) return Random.Range(2.5f, 7f);
 
-        return Random.Range(1.25f, 2f);
+        return Random.Range(1.50f, 4f);
     }
 
     public int CalculateFundCost()
@@ -532,18 +542,30 @@ public class GameManager : MonoBehaviour
             head1.gameObject.SetActive(true);
             head2.gameObject.SetActive(false);
             head3.gameObject.SetActive(false);
+
+            dragonHead1.gameObject.SetActive(true);
+            dragonHead2.gameObject.SetActive(false);
+            dragonHead3.gameObject.SetActive(false);
         }
         else if (a == 1)
         {
             head1.gameObject.SetActive(false);
             head2.gameObject.SetActive(true);
             head3.gameObject.SetActive(false);
+
+            dragonHead1.gameObject.SetActive(false);
+            dragonHead2.gameObject.SetActive(true);
+            dragonHead3.gameObject.SetActive(false);
         }
         else
         {
             head1.gameObject.SetActive(false);
             head2.gameObject.SetActive(false);
             head3.gameObject.SetActive(true);
+
+            dragonHead1.gameObject.SetActive(false);
+            dragonHead2.gameObject.SetActive(false);
+            dragonHead3.gameObject.SetActive(true);
         }
     }
 
@@ -570,8 +592,6 @@ public class GameManager : MonoBehaviour
 
     public void StartMusic(string path)
     {
-
-        UnityEngine.Debug.Log("sueno");
         if (is1Playing)
         {
             eventInstance1.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
