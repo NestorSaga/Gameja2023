@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour
                 endController.GameEnd(true);//WIN
                 StartMusic(winGamePath);
             }
-            else if (currentGold <= 0) 
+            else if (currentGold <= 10000) 
             {
                 endController.GameEnd(false);//LOSE
                 StartMusic(loseGamePath);
@@ -140,6 +140,18 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            if (currentGold >= 1000000)
+            {
+                endController.GameEnd(true);//WIN
+                StartMusic(winGamePath);
+            }
+
+            else if (currentGold <= 10000)
+            {
+                endController.GameEnd(false);//LOSE
+                StartMusic(loseGamePath);
+            }
+
             float chance = 0.01f;
             if (Random.Range(0f, 100f) <= chance) StartMusic(trapHalationPath);
             else StartMusic(randomMusicPaths[Random.Range(0,randomMusicPaths.Length)]);
@@ -207,17 +219,7 @@ public class GameManager : MonoBehaviour
     public void recalculateCurrentGold(int value)
     {
         currentGold += value;
-        if (currentGold >= 1000000)
-        {
-            endController.GameEnd(true);//WIN
-            StartMusic(winGamePath);
-        }
-
-        else if (currentGold <= 0) 
-        {
-            endController.GameEnd(false);//LOSE
-            StartMusic(loseGamePath);
-        } 
+        
         currentGoldText.text = currentGold.ToString();
         //csm.SetAmount(currentGold);
     }
@@ -283,16 +285,16 @@ public class GameManager : MonoBehaviour
                 switch (currentFundedProjects[i]._colorId)
                 {
                     case 0:
-                        newResult.transform.GetChild(2).gameObject.SetActive(true);
+                        newResult.transform.GetChild(0).gameObject.SetActive(true);
                         break;
                     case 1:
-                        newResult.transform.GetChild(3).gameObject.SetActive(true);
+                        newResult.transform.GetChild(1).gameObject.SetActive(true);
                         break;
                     case 2:
-                        newResult.transform.GetChild(4).gameObject.SetActive(true);
+                        newResult.transform.GetChild(2).gameObject.SetActive(true);
                         break;
                     case 3:
-                        newResult.transform.GetChild(5).gameObject.SetActive(true);
+                        newResult.transform.GetChild(3).gameObject.SetActive(true);
                         break;
                 }
                 yield return new WaitForSeconds(0.3f);
@@ -300,7 +302,7 @@ public class GameManager : MonoBehaviour
                 //calculate if winner winner chicken dinner
                 if (CalculateWinnerInRange(currentFundedProjects[i].percentageRangeA, currentFundedProjects[i].percentageRangeB))
                 {
-                    newResult.transform.GetChild(0).gameObject.SetActive(true);
+                    newResult.transform.GetChild(4).gameObject.SetActive(true);
                     currentGold += (int)(currentFundedProjects[i].fundCostValue * currentFundedProjects[i].ROIPercentageValue);
                     currentGoldText.text = currentGold.ToString();
                     currentFundedProjects[i].hasWon = true;
@@ -330,7 +332,7 @@ public class GameManager : MonoBehaviour
                     }
                 }
                     
-                else newResult.transform.GetChild(1).gameObject.SetActive(true);
+                else newResult.transform.GetChild(5).gameObject.SetActive(true);
                 yield return new WaitForSeconds(0.15f);
             }
 
@@ -481,15 +483,15 @@ public class GameManager : MonoBehaviour
     public int CalculateFundCost()
     {
         int lowFundCost = 20;
-        int highFundCost = 45;
+        int highFundCost = 35;
         if(commerceTimesUpgraded >= 3)
         {
             lowFundCost = 20;
             highFundCost = 65;
         }
 
-        float lowFundCostCurrent = currentGold * (lowFundCost / 100f);
-        float highFundCostCurrent = currentGold * (highFundCost / 100f);
+        float lowFundCostCurrent = roundStartingGold * (lowFundCost / 100f);
+        float highFundCostCurrent = roundStartingGold * (highFundCost / 100f);
 
         //Bingo
         float bingoCheck = bingoChance;
