@@ -69,7 +69,7 @@ public class PrompScript : MonoBehaviour
     public void setROIPercentage(float a)
     {
         ROIPercentageValue = a;
-        string text = (int)((a-1f) * 100f) + "%";
+        string text = "+ " + (int)((a-1f) * 100f) + "%";
         ROIPercentage.text = text;
     }
 
