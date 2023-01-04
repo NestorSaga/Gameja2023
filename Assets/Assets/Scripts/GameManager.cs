@@ -60,9 +60,10 @@ public class GameManager : MonoBehaviour
     public float bingoChance;
 
     //----FMOD----//
-    public string music1Path, music2Path;
-    public FMOD.Studio.EventInstance eventInstance;
-
+    public string[] randomMusicPaths;
+    public string winGamePath, loseGamePath, interludePath;
+    public FMOD.Studio.EventInstance eventInstance1, eventInstance2;
+    public bool is1Playing;
 
 
     // Start is called before the first frame update
@@ -86,14 +87,18 @@ public class GameManager : MonoBehaviour
         currentTotalPeople = 8;
         peopleSeen = 0;
 
-
+        currentGoldText.text = currentGold.ToString();
         //Instantiate new char
         //Animation
         Funding = true;
         roundNumber = 1;
 
-        slideObject.anchoredPosition = slideStartPos.anchoredPosition;  
+        slideObject.anchoredPosition = slideStartPos.anchoredPosition;
 
+        SetCurrentRound();
+        SetPeopleInRound();
+
+        StartMusic(randomMusicPaths[Random.Range(0, randomMusicPaths.Length)]);
         NextPrompt();
     }
 
@@ -110,9 +115,13 @@ public class GameManager : MonoBehaviour
             nextRound();
         }
 
-        if (Input.GetKey(KeyCode.P)) endController.GameEnd(false);
+        if (Input.GetKey(KeyCode.P))
+        {
+            endController.GameEnd(true);//WIN
+            StartMusic(winGamePath);
+        }
 
-        if (Input.GetKeyDown(KeyCode.A)) StartMusic(music1Path);
+        //if (Input.GetKeyDown(KeyCode.A)) StartMusic(music1Path);
         else if (Input.GetKey(KeyCode.U)) StopMusic();
     }
     public void nextRound()
@@ -120,11 +129,23 @@ public class GameManager : MonoBehaviour
         if (roundNumber >= totalRounds)
         {
             //Game end
-            if (currentGold >= 1000000) endController.GameEnd(true);//WIN
-            else if (currentGold <= 0) endController.GameEnd(false);//LOSE
+            if (currentGold >= 1000000)
+            {
+                endController.GameEnd(true);//WIN
+                StartMusic(winGamePath);
+            }
+            else if (currentGold <= 0) 
+            {
+                endController.GameEnd(false);//LOSE
+                StartMusic(loseGamePath);
+            } 
         }
         else
         {
+
+            StartMusic(randomMusicPaths[Random.Range(0,randomMusicPaths.Length)]);
+
+
             roundStartingGold = currentGold;
 
             peopleSeen = 0;
@@ -132,6 +153,7 @@ public class GameManager : MonoBehaviour
             hasBingoMilitarAppeared = false;
             hasBingoReligionAppeared = false;
             roundNumber++;
+            SetCurrentRound();
             for (int i = 0; i < currentFundedProjects.Count; i++)
             {
                 fundedProjectsRecord.Add(currentFundedProjects[i]);
@@ -182,8 +204,17 @@ public class GameManager : MonoBehaviour
     public void recalculateCurrentGold(int value)
     {
         currentGold += value;
-        if (currentGold >= 1000000) endController.GameEnd(true);//WIN
-        else if (currentGold <= 0) endController.GameEnd(false);//LOSE
+        if (currentGold >= 1000000)
+        {
+            endController.GameEnd(true);//WIN
+            StartMusic(winGamePath);
+        }
+
+        else if (currentGold <= 0) 
+        {
+            endController.GameEnd(false);//LOSE
+            StartMusic(loseGamePath);
+        } 
         currentGoldText.text = currentGold.ToString();
     }
 
@@ -209,6 +240,7 @@ public class GameManager : MonoBehaviour
 
                 //newPrompt.transform.SetParent(promptPosition);
                 peopleSeen++;
+                SetPeopleInRound();
             } 
         }
         else
@@ -221,6 +253,9 @@ public class GameManager : MonoBehaviour
 
     public void Interlude()
     {
+
+        StartMusic(interludePath);
+
         StartCoroutine(SlideIn());
 
         IEnumerator SlideIn(){
@@ -390,34 +425,34 @@ public class GameManager : MonoBehaviour
                 if (militarTimesUpgraded >= 1)
                 {
                     amountToMultiply *= militarTimesUpgraded;
-                    lowRange = Random.Range((int)amountToMultiply, 100 - 1);
-                }else lowRange = Random.Range(startingLowRangeValue, 100 - 1);
+                    lowRange = Random.Range((int)amountToMultiply, 50 - 1);
+                }else lowRange = Random.Range(startingLowRangeValue, 50 - 1);
                 break;
             case 1:
                 if (commerceTimesUpgraded >= 1)
                 {
                     amountToMultiply *= commerceTimesUpgraded;
-                    lowRange = Random.Range((int)amountToMultiply, 100 - 1);
-                }else lowRange = Random.Range(startingLowRangeValue, 100 - 1);
+                    lowRange = Random.Range((int)amountToMultiply, 50 - 1);
+                }else lowRange = Random.Range(startingLowRangeValue, 50 - 1);
                 break;
             case 2:
                 if (religionTimesUpgraded >= 1)
                 {
                     amountToMultiply *= religionTimesUpgraded;
-                    lowRange = Random.Range((int)amountToMultiply, 100 - 1);
-                }else lowRange = Random.Range(startingLowRangeValue, 100 - 1);
+                    lowRange = Random.Range((int)amountToMultiply, 50 - 1);
+                }else lowRange = Random.Range(startingLowRangeValue, 50 - 1);
                 break;
             case 3:
                 if (peopleTimesUpdated >= 1)
                 {               
                     amountToMultiply *= peopleTimesUpdated;
-                    lowRange = Random.Range((int)amountToMultiply, 100 - 1);
+                    lowRange = Random.Range((int)amountToMultiply, 50 - 1);
                 }
-                else lowRange = Random.Range(startingLowRangeValue, 100 - 1);
+                else lowRange = Random.Range(startingLowRangeValue, 50 - 1);
                 break;
         }
 
-        highRange = Random.Range(lowRange, 55);
+        highRange = Random.Range(lowRange, 75);
 
     }
 
@@ -507,31 +542,48 @@ public class GameManager : MonoBehaviour
 
     public void SetPeopleInRound()
     {
-        peopleText.text = peopleSeen + " / " + currentTotalPeople;
+        peopleText.text = "Folk this round: " + peopleSeen + " / " + currentTotalPeople;
     }
     public void SetCurrentRound()
     {
-        roundText.text = roundNumber + " / " + totalRounds;
+        roundText.text = "Current Round: " + roundNumber + " / " + totalRounds;
     }
 
 
     public void StartMusic(string path)
     {
-        UnityEngine.Debug.Log("Empieza");
 
-        eventInstance = FMODUnity.RuntimeManager.CreateInstance(path);
+        UnityEngine.Debug.Log("sueno");
+        if (is1Playing)
+        {
+            eventInstance1.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            eventInstance1.release();
 
-        eventInstance.start();
-        eventInstance.setVolume(0.5f);
+            eventInstance2 = FMODUnity.RuntimeManager.CreateInstance(path);
 
+            eventInstance2.start();
+            eventInstance2.setVolume(0.5f);
 
+            is1Playing = false;
+        }
+        else
+        {
+            eventInstance2.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            eventInstance2.release();
+
+            eventInstance1 = FMODUnity.RuntimeManager.CreateInstance(path);
+
+            eventInstance1.start();
+            eventInstance1.setVolume(0.5f);
+
+            is1Playing = true;
+        }
 
     }
 
     public void StopMusic()
     {
-        UnityEngine.Debug.Log("PARAAAA");
-        eventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        eventInstance.release();
+       // instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+       // instance.release();
     }
 }
