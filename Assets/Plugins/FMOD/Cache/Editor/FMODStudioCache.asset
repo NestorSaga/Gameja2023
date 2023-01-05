@@ -69,10 +69,10 @@ MonoBehaviour:
   Path: ../../../FMOD Studio/Gameja/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638084715200123046
+  lastModified: 638084720077537956
   FileSizes:
   - Name: Desktop
-    Value: 1242
+    Value: 1310
   Exists: 1
 --- !u!114 &-2190612601207321807
 MonoBehaviour:
@@ -143,10 +143,10 @@ MonoBehaviour:
   Path: ../../../FMOD Studio/Gameja/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638084715200102857
+  lastModified: 638084720077517960
   FileSizes:
   - Name: Desktop
-    Value: 5601440
+    Value: 5688064
   Exists: 1
 --- !u!114 &-251157895172508564
 MonoBehaviour:
@@ -203,12 +203,13 @@ MonoBehaviour:
   - {fileID: -8634483522752630404}
   - {fileID: 3162244704062854164}
   - {fileID: -1840216869058286081}
+  - {fileID: 4759310823097974473}
   EditorParameters: []
   MasterBanks:
   - {fileID: -1612035014458429821}
   StringsBanks:
   - {fileID: -3171743591244013457}
-  cacheTime: 638084715200123046
+  cacheTime: 638084720077537956
   cacheVersion: 131593
 --- !u!114 &1234110387627648450
 MonoBehaviour:
@@ -318,6 +319,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 39056
+--- !u!114 &4759310823097974473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/446333__darkiron98__24-pasospinguino
+  m_EditorClassIdentifier: 
+  Path: event:/446333__darkiron98__24-pasospinguino
+  Guid:
+    Data1: -397237456
+    Data2: 1079297081
+    Data3: -608351067
+    Data4: 23150489
+  Banks:
+  - {fileID: -1612035014458429821}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3200
 --- !u!114 &7209944483771917003
 MonoBehaviour:
   m_ObjectHideFlags: 0

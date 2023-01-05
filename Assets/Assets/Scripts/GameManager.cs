@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     //----FMOD----//
     public string[] randomMusicPaths;
     public string winGamePath, loseGamePath, interludePath, trapHalationPath;
+    public string steps, coin;
     public FMOD.Studio.EventInstance eventInstance1, eventInstance2;
     public bool is1Playing;
 
@@ -241,6 +242,7 @@ public class GameManager : MonoBehaviour
             IEnumerator NPCAnim()
             {
                 nPCGenerator.PlayAnimation(true);
+                
                 yield return new WaitForSeconds(2f);
 
                 GameObject newPrompt = Instantiate(promptPrefab);
@@ -617,6 +619,14 @@ public class GameManager : MonoBehaviour
             is1Playing = true;
         }
 
+    }
+
+    public void StartOneShotMusic(string path)
+    {
+        FMOD.Studio.EventInstance instance;
+
+        instance = FMODUnity.RuntimeManager.CreateInstance(path);
+        instance.start();
     }
 
     public void StopMusic()

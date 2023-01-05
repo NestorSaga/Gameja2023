@@ -78,6 +78,7 @@ public class PrompScript : MonoBehaviour
     {
         if(!(GameManager.Instance.currentGold - this.fundCostValue <=0))
         {
+            GameManager.Instance.StartOneShotMusic(GameManager.Instance.coin);
             //GameManager.Instance.AddToCurrentList(this);
             GameManager.Instance.NPCDespawn(this, false);
             gameObject.SetActive(false);
